@@ -23,4 +23,4 @@ jobs:
 
       - name: Run tests
         shell: cmd
-        run: cpp\input_validator_test.exe
+        run: .\cpp\input_validator_test.exe
