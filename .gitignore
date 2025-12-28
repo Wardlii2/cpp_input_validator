@@ -1,6 +1,21 @@
-# Compiled binaries
+# ---- C++ build artifacts ----
 *.exe
 *.obj
+*.pdb
+*.ilk
+*.lib
+*.exp
 
-# Temporary / local files
-*.txt
+# ---- Python artifacts ----
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# ---- Java / IntelliJ artifacts ----
+.idea/
+out/
+*.iml
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
