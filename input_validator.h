@@ -70,7 +70,7 @@ class InputValidator{
 
         for (unsigned char ch : s) {
             if (!(std:: isupper(ch) || std:: isdigit(ch))){
-                throw std:: invalid_argument("character is invalid or not supperted can only ne capital or number");
+                throw std:: invalid_argument("character is invalid or not supported can only be a capital or number");
             }
         }
 
