@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build tests (MSVC)
+        shell: cmd
+        run: cl /EHsc input_validator_test.cpp
+
+      - name: Run tests
+        shell: cmd
+        run: input_validator_test.exe
