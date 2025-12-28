@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-and-test:
+  cpp-build-and-test:
     runs-on: windows-latest
 
     steps:
@@ -19,8 +19,8 @@ jobs:
 
       - name: Build tests (MSVC)
         shell: cmd
-        run: cl /EHsc input_validator_test.cpp
+        run: cl /EHsc cpp\input_validator_test.cpp
 
       - name: Run tests
         shell: cmd
-        run: input_validator_test.exe
+        run: cpp\input_validator_test.exe
