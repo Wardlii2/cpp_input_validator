@@ -55,14 +55,25 @@ int main() {
     expectInvalidArguments(v, "ABC 123"); // internal space should fail
 
 
-// 6) length > 50 rejected
+   // 6) length > 50 rejected
     expectInvalidArguments(v, std::string(51, 'A'));
 
-    // 7) length == 50 allowed
+   // 7)digit at start rejection cases
+    expectInvalidArguments(v, "1TEST");
+    expectInvalidArguments(v, "  123TEST  ");
+    expectInvalidArguments(v, "1");
+    expectInvalidArguments(v, "\t\t3");
+    
+
+    // 8) length == 50 allowed
     expectValid(v, std::string(50, 'A'), std::string(50, 'A'));
 
-    // 8) valid input allowed
+    // 9) valid input allowed
     expectValid(v, "A1B2C3", "A1B2C3");
+
+    expectValid(v, "TEST1", "TEST1");
+
+    expectValid(v, "T1E2S3T4", "T1E2S3T4");
 
 
     std::cout << "All tests passed. \n";

@@ -3,6 +3,7 @@ public class InputValidatorSkeleton {
     public String validateCommand(String command){
         validateNotNull(command);
         String normalized = normalizeCommand(command);
+        validateDigitNotAtStart(normalized);
         validateLength(normalized);
         validateCharacters(normalized);
 
@@ -31,6 +32,16 @@ public class InputValidatorSkeleton {
 
         return trimmed;
     }
+
+    /** validating character at start is a digit and if it is throwing exeption */
+    private void validateDigitNotAtStart(String command){
+        char currentChar = command.charAt(0);
+        if (Character.isDigit(currentChar))
+            throw new IllegalArgumentException("Cannot have digit at the start");
+
+    }
+
+
 
     private void validateLength(String command){
         if (command.length() > MAX_COMMAND_LENGTH)

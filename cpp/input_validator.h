@@ -58,6 +58,15 @@ class InputValidator{
     return trimmed;
 
     }
+    // checking that command is not beggining with a string.
+    void validateDigitNotAtStart(const std::string& s) const {
+        if (std::isdigit(s[0])) {
+            throw std:: invalid_argument("Command cannot contain a digit at the beggining.");
+
+        }
+    }
+
+
 
     void validateLengthOfString(const std::string& s) const {
         if (s.size() > MAX_COMMAND_LENGTH) {
@@ -81,6 +90,7 @@ class InputValidator{
     std:: string validateCommand(const std::string& command)   const {
         validateNotEmptyOrWhitespace(command);
         std:: string normalized = trim(command);
+        validateDigitNotAtStart(normalized);
         validateLengthOfString(normalized);
         validateCharactersAreValid(normalized);
 

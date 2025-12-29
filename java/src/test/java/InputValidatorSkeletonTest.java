@@ -35,6 +35,22 @@ public class InputValidatorSkeletonTest {
     }
 
     @Test
+    void digitAtstart_throws(){
+        assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("1TEST"));
+    }
+
+     @Test
+    void digitAtstart_throws_also(){
+        assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("  123TEST  "));
+    }
+
+     @Test
+    void digitAtstart_throws_also_too(){
+        assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("3"));
+    }
+
+
+    @Test
     void symbol_throws(){
         assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("ABC@123"));
     }
@@ -54,6 +70,11 @@ public class InputValidatorSkeletonTest {
     @Test
     void validUppercaseAndDigits_isAllowed(){
         assertEquals("HELLO123", validator.validateCommand("HELLO123"));
+    }
+
+    @Test
+    void validNonDigitFirst_isAllowed(){
+        assertEquals("TEST1", validator.validateCommand("TEST1"));
     }
 
 }

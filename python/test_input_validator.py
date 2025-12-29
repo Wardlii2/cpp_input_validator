@@ -56,6 +56,44 @@ def test_valid_uppercase_and_digits_is_allowed():
     v = Input_Validator()
     assert v.validate_command("HELLO123") == "HELLO123"
 
+# testing to see if digit not at the start is valid
+def test_valid_not_Digit_at_start_allowed():
+    v = Input_Validator()
+    assert v.validate_command("TES1T") == "TES1T"
+
+# testing to see if digit not at the start is valid also
+def test_valid_not_Digit_at_start_allowed_also():
+    v = Input_Validator()
+    assert v.validate_command("T1E2S3T4") == "T1E2S3T4"
+
+# testing to see if digit at the start throws correctly
+def test_invalid_Digit_at_start_not_allowed():
+    v = Input_Validator()
+    with pytest.raises(ValueError):
+        v.validate_command("1TEST")
+        
+# testing to see if digit at the start throws correctly and with whitespace
+def test_invalid_Digit_at_start_not_allowed_and_trailling_whitespace_and_whitespace():
+    v = Input_Validator()
+    with pytest.raises(ValueError):
+        v.validate_command("  123TEST  ")
+
+# testing to see if digit at the start throws correctly and with whitespace
+def test_invalid_Digit_at_start_not_allowed_and_trailling_whitespace():
+    v = Input_Validator()
+    with pytest.raises(ValueError):
+        v.validate_command("123TEST   ")
+
+
+
+
+
+
+
+
+
+
+
 
 
     
