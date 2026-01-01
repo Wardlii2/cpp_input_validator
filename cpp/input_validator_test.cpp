@@ -41,39 +41,50 @@ int main() {
     expectInvalidArguments(v, "   ");
     expectInvalidArguments(v, "\t\t");
     expectInvalidArguments(v, "\n");
+    expectInvalidArguments(v, "  ABC123  ");
+    expectInvalidArguments(v, "ABC123");
+
 
     // 3) trimming works
-    expectValid(v, "  ABC123  ", "ABC123");
+    expectValid(v, "  CMD:ABC123  ", "CMD:ABC123");
 
     // 4) lowercase rejected
-    expectInvalidArguments(v, "abc");
-    expectInvalidArguments(v, "ABCd");
+    expectInvalidArguments(v, "CMD:abc");
+    expectInvalidArguments(v, "CMD:ABCd");
 
     // 5) symbols rejected
-    expectInvalidArguments(v, "ABC-123");
-    expectInvalidArguments(v, "ABC_123");
-    expectInvalidArguments(v, "ABC 123"); // internal space should fail
+    expectInvalidArguments(v, "CMD:ABC-123");
+    expectInvalidArguments(v, "CMD:ABC_123");
+    expectInvalidArguments(v, "CMD:ABC 123"); // internal space should fail
+
+    //5.5 checking empty for CMD
+    expectInvalidArguments(v, "CMD:");
+    expectInvalidArguments(v, "   CMD:  ");
 
 
    // 6) length > 50 rejected
-    expectInvalidArguments(v, std::string(51, 'A'));
+    expectInvalidArguments(v, "CMD:" + std::string(47, 'A'));
 
    // 7)digit at start rejection cases
-    expectInvalidArguments(v, "1TEST");
-    expectInvalidArguments(v, "  123TEST  ");
-    expectInvalidArguments(v, "1");
-    expectInvalidArguments(v, "\t\t3");
+    expectInvalidArguments(v, "CMD:1TEST");
+    expectInvalidArguments(v, "  CMD:123TEST  ");
+    expectInvalidArguments(v, "CMD:1");
+    expectInvalidArguments(v, "CMD:\t\t3");
     
 
     // 8) length == 50 allowed
-    expectValid(v, std::string(50, 'A'), std::string(50, 'A'));
+    expectValid(
+    v,
+    "CMD:" + std::string(46, 'A'),
+    "CMD:" + std::string(46, 'A')
+);
 
     // 9) valid input allowed
-    expectValid(v, "A1B2C3", "A1B2C3");
+    expectValid(v, "CMD:A1B2C3", "CMD:A1B2C3");
 
-    expectValid(v, "TEST1", "TEST1");
+    expectValid(v, "CMD:TEST1", "CMD:TEST1");
 
-    expectValid(v, "T1E2S3T4", "T1E2S3T4");
+    expectValid(v, "CMD:T1E2S3T4", "CMD:T1E2S3T4");
 
 
     std::cout << "All tests passed. \n";
