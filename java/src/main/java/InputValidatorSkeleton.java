@@ -3,9 +3,12 @@ public class InputValidatorSkeleton {
     public String validateCommand(String command){
         validateNotNull(command);
         String normalized = normalizeCommand(command);
-        validateDigitNotAtStart(normalized);
+        validatePrefixExists(normalized);
+        String payload = (normalized.substring(4));
+        validatePayloadNotEMpty(payload);
+        validateDigitNotAtStart(payload);
         validateLength(normalized);
-        validateCharacters(normalized);
+        validateCharacters(payload);
 
 
         return normalized;
@@ -31,6 +34,24 @@ public class InputValidatorSkeleton {
 
 
         return trimmed;
+    }
+
+    // checking if the payload in payload is empty.
+      private void validatePayloadNotEMpty(String payload){
+        if (payload.trim().isEmpty()){
+            throw new IllegalArgumentException("Payload must not be empty.");
+        }
+
+
+    }
+
+
+    private void validatePrefixExists(String command){
+        if (!command.startsWith("CMD:")){
+            throw new IllegalArgumentException("this command is missing the required prefix.");
+        }
+
+
     }
 
     /** validating character at start is a digit and if it is throwing exeption */
