@@ -58,9 +58,27 @@ class InputValidator{
     return trimmed;
 
     }
+
+
+    //validating that the prefix is at the start
+    void validatePrefixAtStart(const std::string& s) const {
+        if (s.size() < 4) {
+            throw std:: invalid_argument("string is too short");
+
+            }
+
+        std::string defining_first_four_characters =  s.substr(0, 4);
+        if (defining_first_four_characters != "CMD:"){
+            throw std:: invalid_argument("Missing required prefix.");
+
+        }
+    }
+
+
+
     // checking that command is not beggining with a string.
     void validateDigitNotAtStart(const std::string& s) const {
-        if (std::isdigit(s[0])) {
+        if (std:: isdigit(static_cast<unsigned char>(s[0]))) {
             throw std:: invalid_argument("Command cannot contain a digit at the beggining.");
 
         }
@@ -90,9 +108,12 @@ class InputValidator{
     std:: string validateCommand(const std::string& command)   const {
         validateNotEmptyOrWhitespace(command);
         std:: string normalized = trim(command);
-        validateDigitNotAtStart(normalized);
+        validatePrefixAtStart(normalized);
+        std:: string payload = normalized.substr(4);
+        validateNotEmptyOrWhitespace(payload);
+        validateDigitNotAtStart(payload);
         validateLengthOfString(normalized);
-        validateCharactersAreValid(normalized);
+        validateCharactersAreValid(payload);
 
 
         return normalized;

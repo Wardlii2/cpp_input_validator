@@ -74,10 +74,7 @@ int main() {
 
     // 8) length == 50 allowed
     expectValid(
-    v,
-    "CMD:" + std::string(46, 'A'),
-    "CMD:" + std::string(46, 'A')
-);
+    v, "CMD:" + std::string(46, 'A'),"CMD:" + std::string(46, 'A'));
 
     // 9) valid input allowed
     expectValid(v, "CMD:A1B2C3", "CMD:A1B2C3");
