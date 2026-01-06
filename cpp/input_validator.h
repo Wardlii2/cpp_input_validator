@@ -1,7 +1,9 @@
+#pragma once
 #include <stdexcept>
 #include <string>
 #include <cctype>
 #include <cstddef>
+
 
 class InputValidator{
 

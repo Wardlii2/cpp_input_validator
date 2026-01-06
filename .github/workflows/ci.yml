@@ -20,18 +20,25 @@ jobs:
       - name: Build tests (MSVC)
         shell: cmd
         run: |
-          cl /EHsc cpp\input_validator_test.cpp /Fe:cpp\input_validator_test.exe
+          cl /EHsc cpp\input_validator_test.cpp /Fo:cpp\ /Fd:cpp\ /Fe:cpp\input_validator_test.exe
+          cl /EHsc cpp\Parser_test.cpp /Fo:cpp\ /Fd:cpp\ /Fe:cpp\Parser_test.exe
+          cl /EHsc cpp\Dispatcher_test.cpp /Fo:cpp\ /Fd:cpp\ /Fe:cpp\Dispatcher_test.exe
+          cl /EHsc cpp\End_to_end_test.cpp cpp\app.cpp /Fo:cpp\ /Fd:cpp\ /Fe:cpp\End_to_end_test.exe
 
       - name: Run tests
         shell: cmd
         run: |
           cpp\input_validator_test.exe
+          cpp\Parser_test.exe
+          cpp\Dispatcher_test.exe
+          cpp\End_to_end_test.exe
 
   python-tests:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -51,7 +58,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Java
         uses: actions/setup-java@v4

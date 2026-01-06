@@ -84,7 +84,7 @@ int main() {
     expectValid(v, "CMD:T1E2S3T4", "CMD:T1E2S3T4");
 
 
-    std::cout << "All tests passed. \n";
+    std::cout << "All Input validator tests passed. \n";
     return 0;
 
 }
