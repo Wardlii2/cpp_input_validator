@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class Main {
-    public static void main(String[] args){
+    public static String process(String rawInput ) {
         // setting up validator and parser
         InputValidatorSkeleton validator = new InputValidatorSkeleton();
         Command_Parser parser = new Command_Parser(validator);
@@ -17,14 +17,15 @@ public class Main {
         // dispatcher setup for handlers
         Dispatcher dispatcher = new Dispatcher(handlers);
 
-
-
-        // end to end example command processing
-        String rawInput = "  CMD:PING  ";
-        Command command = parser.parse(rawInput);
-        String response = dispatcher.dispatch(command);
-
-        System.out.println(response);
+        // example command processing loop
+            Command command = parser.parse(rawInput);
+            return dispatcher.dispatch(command);
+    }
+        
+        
+        public static void main(String[] args) {
+            System.out.println(process("CMD:PING"));  // Output: PONG
+            System.out.println(process("CMD:STATUS")); // Output: STATUS_OK
            
     
 
