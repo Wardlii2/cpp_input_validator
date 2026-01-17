@@ -2,14 +2,25 @@ from input_validator import InputValidator
 from parser import CommandParser
 from dispatcher import CommandDispatcher
 
-def process(raw_input: str) -> str:
+#process
+def process(rawInput:str, parser: CommandParser, dispatcher: CommandDispatcher) -> str:
+    command = parser.parse(rawInput)
+    return dispatcher.dispatch(command)
+
+
+#Providing example output
+if __name__ == "__main__":
     validator = InputValidator()
     parser = CommandParser(validator)
     dispatcher = CommandDispatcher()
 
-    command = parser.parse(raw_input)
-    return dispatcher.dispatch(command)
+#testing inputs 
+    print(process("CMD:PING", parser, dispatcher))
+    print(process("CMD:STATUS", parser, dispatcher))
 
-if __name__ == "__main__":
-    print(process("CMD:PING"))
-    print(process("CMD:STATUS"))
+
+
+
+
+
+
