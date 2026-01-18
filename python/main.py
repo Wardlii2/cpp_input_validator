@@ -3,20 +3,22 @@ from parser import CommandParser
 from dispatcher import CommandDispatcher
 
 #process
-def process(rawInput:str, parser: CommandParser, dispatcher: CommandDispatcher) -> str:
+def process(rawInput:str) -> str:
+    #instenciate all wiring for the pipeline
+    validator = InputValidator()
+    parser = CommandParser(validator)
+    dispatcher = CommandDispatcher()
+
+    #the actual pipeline
     command = parser.parse(rawInput)
     return dispatcher.dispatch(command)
 
 
 #Providing example output
 if __name__ == "__main__":
-    validator = InputValidator()
-    parser = CommandParser(validator)
-    dispatcher = CommandDispatcher()
-
 #testing inputs 
-    print(process("CMD:PING", parser, dispatcher))
-    print(process("CMD:STATUS", parser, dispatcher))
+    print(process("CMD:PING"))
+    print(process("CMD:STATUS"))
 
 
 

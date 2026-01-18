@@ -1,5 +1,5 @@
 #defining the class correctly.
-class Input_Validator:
+class InputValidator:
     MAX_COMMAND_LENGTH = 50
     #defining the main method.
     def validate_command(self, command: str) -> str:

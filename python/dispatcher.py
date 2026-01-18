@@ -1,4 +1,5 @@
 from handlers import Handlers
+from command import Command
 
 class CommandDispatcher:
     def __init__(self):
