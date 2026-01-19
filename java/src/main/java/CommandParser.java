@@ -1,8 +1,8 @@
-// defining Command_Parser as a class.
-public class Command_Parser {
+// defining CommandParser as a class.
+public class CommandParser {
     private InputValidatorSkeleton validator;
 
-    public Command_Parser(InputValidatorSkeleton validator) {
+    public CommandParser(InputValidatorSkeleton validator) {
         this.validator = validator;
     }
 
