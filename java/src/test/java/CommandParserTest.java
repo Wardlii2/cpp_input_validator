@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 public class TestingParser {
     
     @Test
@@ -15,6 +16,20 @@ public class TestingParser {
         assertEquals("PING", command.getName());
 
     }
+
+      @Test
+    void test_status_parsed_ok() {
+
+        InputValidatorSkeleton validator = new InputValidatorSkeleton();
+
+        CommandParser parser = new CommandParser(validator);
+
+        Command command = parser.parse("CMD:STATUS");
+
+        assertEquals("STATUS", command.getName());
+
+    }
+
 
     @Test
     void test_Unknown_parsed_throws() {
