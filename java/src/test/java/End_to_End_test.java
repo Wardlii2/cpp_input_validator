@@ -13,7 +13,7 @@ public class End_to_End_test {
     //testing the STATUS command
      @Test
     public void End_to_End_test_STATUS() {
-        assertEquals("STATUS_OK", Main.process("CMD:STATUS"));
+        assertEquals("STATUS:OK", Main.process("CMD:STATUS"));
 
     }
 
