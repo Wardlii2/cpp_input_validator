@@ -1,8 +1,11 @@
 #include <iostream>
 #include <stdexcept>
 #include <cassert>
+
 #include "Parser.h"
 #include "input_validator.h"
+#include "Command.h"
+
 // End-to-end test for the application process function
 
     static void expectInvalid(const Parser& parser, const std::string& input) {

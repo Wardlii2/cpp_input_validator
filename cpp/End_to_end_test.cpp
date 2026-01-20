@@ -6,7 +6,7 @@
 int main() {
         // Test valid commands
         assert(process("CMD:PING") == "PONG");
-        assert(process("CMD:STATUS") == "STATUS_OK");
+        assert(process("CMD:STATUS") == "STATUS:OK");
         assert(process("CMD:HELLO") == "UNKNOWN_COMMAND");
 
         // Test invalid command format

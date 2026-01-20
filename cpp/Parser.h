@@ -3,6 +3,7 @@
 
 #include "input_validator.h"
 #include "Command.h"
+
 // Parser implementation /
 class Parser {
 private:
