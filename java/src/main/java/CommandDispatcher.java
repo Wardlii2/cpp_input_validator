@@ -9,6 +9,7 @@ public class CommandDispatcher {
         handler = new HashMap<>();
         handler.put("PING", Handlers::ping);
         handler.put("STATUS", Handlers::status);
+        handler.put("UPTIME", Handlers::uptime);
     }
 
 

@@ -6,3 +6,7 @@ class Handlers:
     @staticmethod
     def status():
         return "STATUS:OK"
+    
+    @staticmethod
+    def uptime():
+        return "UPTIME:0"

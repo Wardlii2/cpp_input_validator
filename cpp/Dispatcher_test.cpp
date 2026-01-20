@@ -12,6 +12,7 @@ int main() {
     assert(dispatcher.dispatch(Command("PING")) == "PONG");
     assert(dispatcher.dispatch(Command("STATUS")) == "STATUS:OK");
     assert(dispatcher.dispatch(Command("HELLO")) == "UNKNOWN_COMMAND");
+    assert(dispatcher.dispatch(Command("UPTIME")) == "UPTIME:0");
     // If all assertions pass
     std::cout << "All Dispatcher tests passed!" << std::endl;
 

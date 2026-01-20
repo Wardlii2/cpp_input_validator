@@ -16,6 +16,11 @@ public class End_to_End_test {
         assertEquals("STATUS:OK", Main.process("CMD:STATUS"));
 
     }
+    //testing the UPTIME command
+     @Test
+    public void End_to_End_test_UPTIME() {
+        assertEquals("UPTIME:0", Main.process("CMD:UPTIME"));
+    }
 
     //testing the UNKNOWN command
      @Test

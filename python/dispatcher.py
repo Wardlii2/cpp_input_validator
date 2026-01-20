@@ -6,6 +6,7 @@ class CommandDispatcher:
         self.handlers = {
             "PING": Handlers.ping,
             "STATUS": Handlers.status,
+            "UPTIME": Handlers.uptime,
         }
 
     def dispatch(self, command):

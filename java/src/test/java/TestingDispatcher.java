@@ -26,6 +26,18 @@ public class TestingDispatcher {
         assertEquals("STATUS:OK", dispatcher.dispatch(command));
 
     }
+
+
+    @Test
+    void test_Uptime_dispatched_ok() {
+
+        CommandDispatcher dispatcher = new CommandDispatcher();
+
+        Command command = new Command("UPTIME");
+
+        assertEquals("UPTIME:0", dispatcher.dispatch(command));
+
+    }
     
 
      @Test

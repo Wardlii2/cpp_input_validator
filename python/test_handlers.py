@@ -13,3 +13,8 @@ class Test_Handlers:
     def test_handle_STATUS_returns_OK(self):
         result = Handlers.status()
         assert result == "STATUS:OK"
+
+    #Test that Handlers.uptime function returns "UPTIME:0"
+    def test_handle_UPTIME_returns_ok(self):
+        result = Handlers.uptime()
+        assert result == "UPTIME:0"

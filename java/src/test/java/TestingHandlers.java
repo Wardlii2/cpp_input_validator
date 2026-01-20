@@ -13,4 +13,9 @@ public class TestingHandlers {
     void test_Status_returns_Status_ok() {
         assertEquals("STATUS:OK", Handlers.status());
     }
+
+    @Test
+    void test_Uptime_returns_uptime() {
+        assertEquals("UPTIME:0", Handlers.uptime());
+    }
 }

@@ -15,6 +15,18 @@ def test_dispatcher_routes_to_handler_ping():
     assert result == "PONG"
    
 
+def test_dispatcher_routes_to_handler_uptime():
+
+    #activating dispatcher
+    dispatcher = CommandDispatcher()
+    #activating command with the right input
+    command = Command("UPTIME")
+
+    #dispatching command to check result
+    result = dispatcher.dispatch(command)
+    assert result == "UPTIME:0"
+
+
 #Prove safe behavior when an unknown command is dispatched.
 def test_that_dispatcher_handles_UNKNOWN_COMMAND():
 

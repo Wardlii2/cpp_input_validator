@@ -11,4 +11,8 @@ inline std::string status() {
     return "STATUS:OK";
 }
 
+inline std::string uptime() {
+    return "UPTIME:0";
+}
+
 }
