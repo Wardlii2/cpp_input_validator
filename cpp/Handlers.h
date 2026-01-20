@@ -3,12 +3,12 @@
 
 // Handlers implementation */
 namespace Handlers {
-inline std::string handlePing() {
+inline std::string ping() {
     return "PONG";
 }
 
-inline std::string handleStatus() {
-    return "STATUS_OK";
+inline std::string status() {
+    return "STATUS:OK";
 }
 
-};
+}

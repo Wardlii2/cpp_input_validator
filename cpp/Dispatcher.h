@@ -2,29 +2,30 @@
 #include <string>
 #include <unordered_map>
 #include <functional>
-#include <utility>
-#include "command.h"
 
-// Dispatcher implementation /
+#include "Command.h"
+#include "Handlers.h"
+
+// Dispatcher class implementation /
 class Dispatcher {
-private:
-    std::unordered_map<std::string, std::function<std::string()>> handlers;
-public:
-    explicit Dispatcher(std::unordered_map<std::string, std::function<std::string()>> h)
-        : handlers(std::move(h)) {}
+    private: 
+    std::unordered_map<std::string, std::function<std::string()>> handler;
+
+    public:
+    Dispatcher() {
+        handler.emplace("PING", Handlers::ping);
+        handler.emplace("STATUS", Handlers::status);
+
+    }
 
     std::string dispatch(const Command& command) const {
-        auto it = handlers.find(command.getName());
-
-        if(it == handlers.end()) {
+        auto it = handler.find(command.getName());
+        if (it == handler.end()) {
             return "UNKNOWN_COMMAND";
         }
-
-        
-
         return it->second();
+    };
 
-}
 };
 
 
