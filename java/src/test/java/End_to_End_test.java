@@ -22,6 +22,12 @@ public class End_to_End_test {
         assertEquals("UPTIME:0", Main.process("CMD:UPTIME"));
     }
 
+    // testing ECHO command
+    @Test
+    public void End_to_End_test_ECHO() {
+        assertEquals("HELLO", Main.process("CMD:ECHO:HELLO"));
+    }
+
     //testing the UNKNOWN command
      @Test
     public void End_to_End_test_UNKNOWN() {

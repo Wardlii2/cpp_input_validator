@@ -15,6 +15,7 @@ public class TestingParser {
         Command command = parser.parse("CMD:PING");
 
         assertEquals("PING", command.getName());
+        assertNull(command.getPayload());
 
     }
 
@@ -28,6 +29,21 @@ public class TestingParser {
         Command command = parser.parse("CMD:STATUS");
 
         assertEquals("STATUS", command.getName());
+        assertNull(command.getPayload());
+
+    }
+
+          @Test
+    void test_echo_parsed_ok() {
+
+        InputValidatorSkeleton validator = new InputValidatorSkeleton();
+
+        CommandParser parser = new CommandParser(validator);
+
+        Command command = parser.parse("CMD:ECHO:HELLO");
+
+        assertEquals("ECHO", command.getName());
+        assertEquals("HELLO", command.getPayload());
 
     }
 

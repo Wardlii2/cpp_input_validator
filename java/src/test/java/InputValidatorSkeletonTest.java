@@ -84,4 +84,38 @@ public class InputValidatorSkeletonTest {
         assertEquals("CMD:TEST1", validator.validateCommand("CMD:TEST1"));
     }
 
+      @Test
+    void echo_Command_is_Allowed(){
+        assertEquals("CMD:ECHO:HELLO", validator.validateCommand("CMD:ECHO:HELLO"));
+    }
+
+        @Test
+    void echo_Command_payload_Allowed_digits(){
+        assertEquals("CMD:ECHO:123HELLO", validator.validateCommand("CMD:ECHO:123HELLO"));
+    }
+
+
+    @Test
+    void echo_Command_throws_If_empty(){
+        assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("CMD:ECHO:"));
+    }
+
+     @Test
+    void echo_Command_throws_If_empty_And_missing_Colon(){
+        assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("CMD:ECHO"));
+    }
+
+     @Test
+    void echo_Command_throws_If_lower_Case(){
+        assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("CMD:ECHO:hi"));
+    }
+
+     @Test
+    void Command_throws_If_has_Payload_if_Not_echo(){
+        assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("CMD:PING:HI"));
+    }
+
+
+
+
 }

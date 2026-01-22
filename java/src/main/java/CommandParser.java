@@ -10,8 +10,18 @@ public class CommandParser {
     public Command parse(String rawInput) {
         
         String validatedInput = validator.validateCommand(rawInput);
-        String commandName = validatedInput.substring(4);
-        return new Command(commandName);
+        String body = validatedInput.substring(4);
+
+        //adding split for command so it becomes 
+        if (body.contains(":")) {
+            String [] parts = body.split(":",2); //spiliting into name and syntax
+            String name = parts[0];
+            String payload = parts[1];
+            return new Command(name, payload);
+        }
+
+
+        return new Command(body, null);
 }
 
 }
