@@ -1,5 +1,4 @@
 from handlers import Handlers
-from command import Command
 
 class CommandDispatcher:
     def __init__(self):
@@ -7,10 +6,11 @@ class CommandDispatcher:
             "PING": Handlers.ping,
             "STATUS": Handlers.status,
             "UPTIME": Handlers.uptime,
+            "ECHO": Handlers.echo,
         }
 
     def dispatch(self, command):
         handler = self.handlers.get(command.name)
         if handler is None:
             return "UNKNOWN_COMMAND"
-        return handler()
+        return handler(command)

@@ -8,7 +8,7 @@ def test_dispatcher_routes_to_handler_ping():
     #acting as the dispatcher with the dummy handler.
     dispatcher = CommandDispatcher()
 
-    command = Command("PING")
+    command = Command("PING", None)
 
     #dispatching the command and asserting the result.
     result = dispatcher.dispatch(command)
@@ -20,11 +20,25 @@ def test_dispatcher_routes_to_handler_uptime():
     #activating dispatcher
     dispatcher = CommandDispatcher()
     #activating command with the right input
-    command = Command("UPTIME")
+    command = Command("UPTIME", None)
 
     #dispatching command to check result
     result = dispatcher.dispatch(command)
     assert result == "UPTIME:0"
+
+
+def test_dispatcher_routes_to_handler_echo():
+
+    #activating dispatcher
+    dispatcher = CommandDispatcher()
+    #activating command with the right input for ECHO CASE
+    command = Command("ECHO", "HELLO")
+
+    #dispatching command to check result
+    result = dispatcher.dispatch(command)
+    assert result == "HELLO"
+
+
 
 
 #Prove safe behavior when an unknown command is dispatched.
@@ -34,7 +48,7 @@ def test_that_dispatcher_handles_UNKNOWN_COMMAND():
     dispatcher = CommandDispatcher()
 
     #Calling command
-    command = Command("Nope")
+    command = Command("Nope", None)
 
     #Now dispatching the command
     result = dispatcher.dispatch(command)

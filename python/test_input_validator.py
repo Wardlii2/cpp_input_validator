@@ -30,8 +30,37 @@ def test_whitespace_only_empty_payload_throws():
 #testing leading and trailing whitespacing
 def test_trims_leading_and_trailing_whitespace_payload():
     v = InputValidator()
-    assert v.validate_command("  CMD:ABC123  ") == "CMD:ABC123"
-    
+    assert v.validate_command("  CMD:ABC  ") == "CMD:ABC"
+
+#testing that a valid argument for echo is accepted.
+def test_echo_is_accepted():
+    v = InputValidator()
+    assert v.validate_command("CMD:ECHO:HELLO") == "CMD:ECHO:HELLO"
+
+#testing ivalid input for Echo throws
+def test_lower_case_throws():
+    v = InputValidator()
+    with pytest.raises(ValueError):
+        v.validate_command("CMD:ECHO:hi")
+
+#testing ivalid input for Echo throws
+def test_empty_payload_no_colon_throws():
+    v = InputValidator()
+    with pytest.raises(ValueError):
+        v.validate_command("CMD:ECHO")
+
+#testing ivalid input for Echo throws
+def test_empty_echo_throws():
+    v = InputValidator()
+    with pytest.raises(ValueError):
+        v.validate_command("CMD:ECHO:")
+
+
+#testing ivalid input for Echo throws
+def test_Payload_throws_When_Invalid():
+    v = InputValidator()
+    with pytest.raises(ValueError):
+        v.validate_command("CMD:PING:HI")
 
 #testing lower case throws
 def test_lower_case_trows():
@@ -58,20 +87,16 @@ def test_length_exactly_max_is_allowed():
     max_len = "CMD:" + "A" * 46
     assert v.validate_command(max_len) == max_len
     
-#checking if uppercase and digits are accepted
-def test_valid_uppercase_and_digits_is_allowed():
+#checking if uppercase and digits are accepted in payload
+def test_valid_uppercase_and_digits_is_allowed_in_payload():
     v = InputValidator()
-    assert v.validate_command("CMD:HELLO123") == "CMD:HELLO123"
+    assert v.validate_command("CMD:ECHO:123HI") == "CMD:ECHO:123HI"
 
 # testing to see if digit not at the start is valid
-def test_valid_not_Digit_at_start_allowed():
+def test_valid_not_Digit_at_start_allowed_in_payload():
     v = InputValidator()
-    assert v.validate_command("CMD:TES1T") == "CMD:TES1T"
+    assert v.validate_command("CMD:ECHO:TES1T") == "CMD:ECHO:TES1T"
 
-# testing to see if digit not at the start is valid also
-def test_valid_not_Digit_at_start_allowed_also():
-    v = InputValidator()
-    assert v.validate_command("CMD:T1E2S3T4") == "CMD:T1E2S3T4"
 
 # testing to see if digit at the start throws correctly
 def test_invalid_Digit_at_start_not_allowed():

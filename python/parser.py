@@ -10,9 +10,15 @@ class CommandParser:
         normalized = self.validator.validate_command(rawInput)
 
         #payload removal of prefix using slicing to extract only the payload string.
-        payload = normalized[4:]
+        body = normalized[4:]
 
-        return Command(payload)
+        #checking wether body after CMD: is removed still contains a : if so split it into name and payload.
+        if ":" in body:
+            name, payload = body.split(":",1)
+            return Command(name, payload)
+
+
+        return Command(body, None)
 
 
 
