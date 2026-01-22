@@ -6,7 +6,7 @@
 #include "input_validator.h"
 #include "Command.h"
 
-// End-to-end test for the application process function
+// Parser test for the parser function
 
     static void expectInvalid(const Parser& parser, const std::string& input) {
         try {
@@ -25,15 +25,22 @@ int main() {
         // Test valid commands
         Command cmd1 = parser.parse("CMD:PING");
         assert(cmd1.getName() == "PING");
+        assert(cmd1.getPayload().empty());
 
         // Test with leading/trailing whitespace
         Command cmd2 = parser.parse("   CMD:STATUS   ");
         assert(cmd2.getName() == "STATUS");
+        assert(cmd2.getPayload().empty());
 
         // Unknown command test is still valid for parsing
         Command cmd3 = parser.parse("CMD:HELLO");
         assert(cmd3.getName() == "HELLO");
+        assert(cmd3.getPayload().empty());
 
+        // Echo test is correct
+        Command cmd4 = parser.parse("CMD:ECHO:HI");
+        assert(cmd4.getName() == "ECHO");
+        assert(cmd4.getPayload() == "HI");
 
         // Test invalid command format
         expectInvalid(parser, "CMD_BADINPUT");
@@ -42,6 +49,11 @@ int main() {
         expectInvalid(parser, "CMD:   ");
         expectInvalid(parser, "CMD:PING_EXTRA");
         expectInvalid(parser, "1CMD:PING_EXTRA");
+        expectInvalid(parser, "CMD:ECHO ");
+        expectInvalid(parser, "CMD:ECHO: ");
+        expectInvalid(parser, "ECHO:");
+
+
 
         // If all assertions pass
         std::cout << "All Parser tests passed!" << std::endl;

@@ -17,15 +17,17 @@ public:
         std::string normalized = validator.validateCommand(rawInput);
 
         //strip CMD prefix
-        std::string payload = normalized.substr(4);
+        std::string body = normalized.substr(4);
 
-        //return Payload
-        return Command(payload);
-
-
-    }
-
-
+        auto pos = body.find(':');
+        if (pos != std::string::npos) {
+            std::string name = body.substr(0, pos);
+            std::string payload = body.substr(pos + 1);
+            return Command(name, payload);
+        }
+         //return Payload
+        return Command(body);
+        }  
 
 };
 

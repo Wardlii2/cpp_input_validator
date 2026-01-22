@@ -47,6 +47,8 @@ int main() {
 
     // 3) trimming works
     expectValid(v, "  CMD:ABC123  ", "CMD:ABC123");
+    expectValid(v, "  CMD:ECHO:HI  ", "CMD:ECHO:HI");
+
 
     // 4) lowercase rejected
     expectInvalidArguments(v, "CMD:abc");
@@ -70,6 +72,7 @@ int main() {
     expectInvalidArguments(v, "  CMD:123TEST  ");
     expectInvalidArguments(v, "CMD:1");
     expectInvalidArguments(v, "CMD:\t\t3");
+
     
 
     // 8) length == 50 allowed
@@ -82,6 +85,18 @@ int main() {
     expectValid(v, "CMD:TEST1", "CMD:TEST1");
 
     expectValid(v, "CMD:T1E2S3T4", "CMD:T1E2S3T4");
+
+    expectValid(v, "CMD:ECHO:HELLO", "CMD:ECHO:HELLO");
+
+    // 10) expect invalid for echo
+    expectInvalidArguments(v, "CMD:ECHO");
+    expectInvalidArguments(v, "CMD:ECHO:");
+    expectInvalidArguments(v, "ECHO:HI");
+    expectInvalidArguments(v, "CMD:PING:HI");
+    expectInvalidArguments(v, "CMD:STATUS:HELLO");
+
+
+
 
 
     std::cout << "All Input validator tests passed. \n";

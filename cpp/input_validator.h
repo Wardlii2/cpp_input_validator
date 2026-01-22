@@ -4,7 +4,6 @@
 #include <cctype>
 #include <cstddef>
 
-
 class InputValidator{
 
     // making a private constant for MAX_COMMAND_LENGTH
@@ -80,6 +79,7 @@ class InputValidator{
 
     // checking that command is not beggining with a string.
     void validateDigitNotAtStart(const std::string& s) const {
+        if (s.empty()) return;
         if (std:: isdigit(static_cast<unsigned char>(s[0]))) {
             throw std:: invalid_argument("Command cannot contain a digit at the beggining.");
 
@@ -108,20 +108,51 @@ class InputValidator{
 
     public:
     std:: string validateCommand(const std::string& command)   const {
+        // Old flow stays exactly the same as before.
         validateNotEmptyOrWhitespace(command);
         std:: string normalized = trim(command);
         validatePrefixAtStart(normalized);
-        std:: string payload = normalized.substr(4);
-        validateNotEmptyOrWhitespace(payload);
-        validateDigitNotAtStart(payload);
         validateLengthOfString(normalized);
-        validateCharactersAreValid(payload);
 
 
+        //body definition for validator
+        std::string body = normalized.substr(4);
+        validateNotEmptyOrWhitespace(body);
+
+        //split body into name and payload as before
+        std::string name;
+        std::string payload;
+        bool hasPayload = false;
+
+        std::size_t pos = body.find(':');
+        if (pos == std::string::npos) {
+            name = body;
+        } else {
+            name = body.substr(0, pos);
+            payload = body.substr(pos + 1);
+            hasPayload = true; 
+
+        }
+
+         // rules for Name (same as before)
+        validateNotEmptyOrWhitespace(name);
+        validateDigitNotAtStart(name);
+        validateCharactersAreValid(name);
+
+
+        // riles for Echo: echo must have a payload
+        if (name == "ECHO") {
+            if (hasPayload != true){
+                throw std::invalid_argument("echo must have a payload");
+            }
+            validateNotEmptyOrWhitespace(payload);
+            validateCharactersAreValid(payload);
+        }else{
+            if(hasPayload == true) {
+                throw std::invalid_argument("non Echo commands cannot have payloads");
+            }
+        }
         return normalized;
-
-
-
     }
 
 
