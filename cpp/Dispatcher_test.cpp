@@ -1,5 +1,4 @@
 // Testing Dispatcher functionality for CMD:PING and CMD:STATUS commands
-#define CATCH_CONFIG_MAIN
 #include "include/Catch2/catch_amalgamated.hpp"
 
 #include "Dispatcher.h"
