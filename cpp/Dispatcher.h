@@ -16,6 +16,7 @@ class Dispatcher {
         handler.emplace("PING", Handlers::ping);
         handler.emplace("STATUS", Handlers::status);
         handler.emplace("UPTIME", Handlers::uptime);
+        handler.emplace("HELP", Handlers::help);
         handler.emplace("ECHO", Handlers::echo);
 
     }

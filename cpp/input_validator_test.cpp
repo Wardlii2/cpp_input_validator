@@ -86,6 +86,8 @@ int main() {
 
     expectValid(v, "CMD:T1E2S3T4", "CMD:T1E2S3T4");
 
+    expectValid(v, "CMD:HELP", "CMD:HELP");
+
     expectValid(v, "CMD:ECHO:HELLO", "CMD:ECHO:HELLO");
 
     // 10) expect invalid for echo
@@ -94,6 +96,13 @@ int main() {
     expectInvalidArguments(v, "ECHO:HI");
     expectInvalidArguments(v, "CMD:PING:HI");
     expectInvalidArguments(v, "CMD:STATUS:HELLO");
+
+    // 11) expextr invalid for HELP
+    expectInvalidArguments(v, "CMD:HELP:HI");
+    expectInvalidArguments(v, "CMD:HELP:");
+    expectInvalidArguments(v, "CMD:help");
+    expectInvalidArguments(v, "HELP");
+
 
 
 

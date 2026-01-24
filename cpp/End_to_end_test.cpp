@@ -8,6 +8,7 @@ int main() {
         assert(process("CMD:PING") == "PONG");
         assert(process("CMD:STATUS") == "STATUS:OK");
         assert(process("CMD:UPTIME") == "UPTIME:0");
+        assert(process("CMD:HELP") == "PING,STATUS,UPTIME,ECHO,HELP");
         assert(process("CMD:ECHO:HI") == "HI");
         assert(process("CMD:HELLO") == "UNKNOWN_COMMAND");
 

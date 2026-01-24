@@ -1,3 +1,6 @@
+#define CATCH_CONFIG_MAIN
+#include "include/Catch2/catch_amalgamated.hpp"
+
 #include <iostream>
 #include <stdexcept>
 #include <cassert>
@@ -41,6 +44,11 @@ int main() {
         Command cmd4 = parser.parse("CMD:ECHO:HI");
         assert(cmd4.getName() == "ECHO");
         assert(cmd4.getPayload() == "HI");
+
+        Command cmd5 = parser.parse("CMD:HELP");
+        assert(cmd5.getName() == "HELP");
+        assert(cmd3.getPayload().empty());
+
 
         // Test invalid command format
         expectInvalid(parser, "CMD_BADINPUT");

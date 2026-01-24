@@ -16,6 +16,10 @@ inline std::string uptime(const Command&) {
     return "UPTIME:0";
 }
 
+inline std::string help(const Command&) {
+    return "PING,STATUS,UPTIME,ECHO,HELP";
+}
+
 inline std::string echo(const Command& command) {
     return command.getPayload();
 }
