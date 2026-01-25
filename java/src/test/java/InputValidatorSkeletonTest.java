@@ -6,6 +6,7 @@ public class InputValidatorSkeletonTest {
 
     private final InputValidatorSkeleton validator = new InputValidatorSkeleton();
 
+    // invalid command tests to throw
     @Test
     void nullCommand_throws() {
         assertThrows(IllegalArgumentException.class,() -> validator.validateCommand(null));
@@ -27,13 +28,6 @@ public class InputValidatorSkeletonTest {
     @Test
     void prefix_empty_throws(){
          assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("ABC123"));
-    }
-
-
-    @Test
-    void trimsLeadingAndTrailingWhitespace(){
-        String result = validator.validateCommand("   CMD:ABC123   ");
-        assertEquals("CMD:ABC123",result);
     }
 
     @Test
@@ -68,6 +62,14 @@ public class InputValidatorSkeletonTest {
         assertThrows(IllegalArgumentException.class,() -> validator.validateCommand(tooLong));
     }
 
+    //valid command tests
+
+    @Test
+    void trimsLeadingAndTrailingWhitespace(){
+        String result = validator.validateCommand("   CMD:ABC123   ");
+        assertEquals("CMD:ABC123",result);
+    }
+
     @Test
     void lengthExactlyMax_isAllowed(){
         String max = "CMD:" + "A".repeat(46);
@@ -95,10 +97,12 @@ public class InputValidatorSkeletonTest {
     }
 
 
+    //echo tests invalid
+
     @Test
     void echo_Command_throws_If_empty(){
         assertThrows(IllegalArgumentException.class,() -> validator.validateCommand("CMD:ECHO:"));
-    }
+    } 
 
      @Test
     void echo_Command_throws_If_empty_And_missing_Colon(){
